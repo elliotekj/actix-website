@@ -6,6 +6,66 @@ weight: 130
 
 # Getting Started
 
+This guide will take your from zero to having an `actix-web` server displaying content
+in your browser.
+
+## Prerequisites
+
+A machine with Rust 1.39 (or newer) installed is the only prerequisite for `actix-web`.
+You can find out which version you have installed by running `rustc --version`.
+
+If you're running an older version of Rust, `rustup update` will upgrade you to the
+latest version.
+
+If you have yet to install Rust, you should follow the official
+[getting started guide][rust-get-started] before going any further.
+
+## Hello, world!
+
+Start by creating a new Cargo project. Note that by default `cargo new` will use the
+binary application template, which is what we want.
+
+```shell
+$ cargo new hello-world
+$ cd hello-world
+```
+
+Next we'll add our dependencies to `Cargo.toml`. In addition to the expected `actix-web`
+dependency, you'll notice the inclusion of the Actix runtime crate `actix-rt` which
+gives us access to a macro we'll be using later.
+
+```toml
+[dependencies]
+actix-web = "2.0"
+actix-rt = "1.0"
+```
+
+With the setup out of the way, we can now get into `actix-web` itself. The remainder of
+this section of the guide takes place in `src/main.rs`.
+
+`main()` is going to be the function that starts our server. As such, we need to make 3
+changes to its definition:
+
+1. Define it as `async`
+2. Set its return type to `std::io::Result<()>`
+3. Mark it with the `#[actix_rt::main]` [attribute macro][attribute-macro] provided
+   by `actix-rt`
+
+```rust
+#[actix_rt::main]
+async fn main() -> std::io::Result<()> {
+    // ...
+}
+```
+
+[rust-get-started]: https://www.rust-lang.org/learn/get-started
+[attribute-macro]: https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros
+[docs-app]: https://docs.rs/actix-web/2.0.0/actix_web/struct.App.html
+
+---
+
+# Getting Started
+
 Let’s write our first `actix-web` application!
 
 ## Hello, world!
